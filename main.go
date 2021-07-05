@@ -24,7 +24,7 @@ var people []Person
 
 func main() {
 	router := mux.NewRouter() // Cria um router usando a lib Mux
-	port := ":1337"           // Define a porta em que vai rodar a minha aplicaço
+	port := ":1337"           // Define a porta em que vai rodar a minha aplicaçao
 
 	// Populando minha array de dados
 	people = append(people, Person{ID: "1", Name: "Jhon", Age: 20, Job: "Professor"})
@@ -40,7 +40,7 @@ func main() {
 	router.HandleFunc("/people/{id}", deletePerson).Methods("DELETE") // Rota para excluir um dado da minha array a partir do ID
 
 	fmt.Println("Starting server at port", port) // Informa no console que o servidor esta rodando
-	log.Fatal(http.ListenAndServe(port, router)) // Inicia o servidor usando a lib http e passando o Router criado na linha 24
+	log.Fatal(http.ListenAndServe(port, router)) // Inicia o servidor usando a lib http e passando o Router criado na linha 26
 }
 
 // Todas as funçoes Rest devem receber dois parametros:
@@ -55,7 +55,7 @@ func updatePerson(writer http.ResponseWriter, request *http.Request) {
 	for index, item := range people { // Aqui iteramos nossos dados para encontrar o elemento com o ID correspondente ao ID do request
 		if item.ID == params["id"] {
 			people = append(people[:index], people[index+1:]...) // Assim que encontramos o ID correspondente removemos o mesmo da array
-			var person Person                                    // Criamos um novo dado que sera inserido na array no lugar do element removido
+			var person Person                                    // Criamos um novo dado que sera inserido na array no lugar do elemento removido
 			_ = json.NewDecoder(request.Body).Decode(&person)    // Passamos os dados do Body do request para dentro da variavel criada
 			person.ID = params["id"]                             // Colocamos o ID correto no novo dado criado
 			people = append(people, person)                      // Adicionamos o novo elemento na array de dados
@@ -90,7 +90,7 @@ func getPerson(writer http.ResponseWriter, request *http.Request) {
 
 func createPerson(writer http.ResponseWriter, request *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
-	var person Person                                 // Criar variavel que sera nosso novo dado
+	var person Person                                 // Cria variavel que sera nosso novo dado
 	_ = json.NewDecoder(request.Body).Decode(&person) // Pega o Body do request e decodifica para a variavel criada anteriormente
 	person.ID = strconv.Itoa(rand.Intn(1000000))      // Gera um numero aleatorio para o ID do novo dado criado
 	people = append(people, person)                   // Adiciona o novo dado na array de dados
