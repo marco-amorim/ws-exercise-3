@@ -1,5 +1,6 @@
 package main
 
+// Import das libs usadas
 import (
 	"encoding/json"
 	"fmt"
@@ -10,6 +11,7 @@ import (
 	"strconv"
 )
 
+// Definindo o struct dos meus dados
 type Person struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
